@@ -1,0 +1,8 @@
+# Generated package files
+*.zst
+*.gz
+*.tar
+
+# Staging dirs
+pkg/
+src/
