@@ -1,0 +1,16 @@
+[Unit]
+Description=OreSat UniClOGS Ground Station management software.
+After=network.online.target
+Wants=network.online.target
+
+[Service]
+Type=simple
+User=yamcs
+Group=yamcs
+PIDFile=/tmp/yamcs.pid
+ExecStart=/usr/bin/yamcsd --check --data-dir /srv/yamcs --log 3 --log-config /etc/yamcs/logging.properties --no-color
+ExecStop=/usr/bin/killall -u yamcs yamcsd
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

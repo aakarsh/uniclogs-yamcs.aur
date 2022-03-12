@@ -3,4 +3,4 @@ clean:
 
 package: clean
 	clear
-	makepkg -s
+	makepkg -si
