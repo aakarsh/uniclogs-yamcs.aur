@@ -24,18 +24,17 @@ package() {
     install -Dm644 ../yamcs.service "${pkgdir}/usr/lib/systemd/system/yamcs.service"
 
     # Generate the directories
+    install -oroot -groot -dm755 ${pkgdir}/usr/bin
+    install -oroot -groot -dm755 ${pkgdir}/usr/lib/yamcs
     install -oroot -groot -dm755 ${pkgdir}/etc/yamcs
     install -oyamcs -gyamcs -dm755 ${pkgdir}/srv/yamcs
     install -oyamcs -gyamcs -dm755 ${pkgdir}/var/log/yamcs
-    install -oyamcs -gyamcs -dm755 ${pkgdir}/opt/yamcs/bin
-    install -oyamcs -gyamcs -dm755 ${pkgdir}/opt/yamcs/lib
-    install -oyamcs -gyamcs -dm755 ${pkgdir}/opt/yamcs/mdb
 
     # Install stuff
-    install -oroot -groot -Cm755 ${_src}/etc/* ${pkgdir}/etc/yamcs
-    install -oyamcs -gyamcs -Cm755 ${_src}/bin/* ${pkgdir}/opt/yamcs/bin
-    install -oyamcs -gyamcs -Cm755 ${_src}/lib/* ${pkgdir}/opt/yamcs/lib
-    install -oyamcs -gyamcs -Cm755 ${_src}/mdb/* ${pkgdir}/opt/yamcs/mdb
+    install -oroot -groot -Cm755 ${_src}/bin/* ${pkgdir}/usr/bin
+    install -oroot -groot -Cm755 ${_src}/lib/* ${pkgdir}/usr/lib/yamcs
+    install -oroot -groot -Cm644 ${_src}/etc/* ${pkgdir}/etc/yamcs
+    install -oroot -groot -CDm644 ${_src}/mdb/* -t ${pkgdir}/etc/yamcs/mdb
 
     # Install everything in static
     cd ${_static}
@@ -48,10 +47,6 @@ package() {
 }
 
 post_install() {
-    # Link stuff
-    ln -s /opt/yamcs/bin/yamcsd /usr/bin/yamcsd
-    ln -s /opt/yamcs/bin/yamcsadmin /usr/bin/yamcsadmin
-
     # Enable the service
     systemctl enable --now yamcs
 }
