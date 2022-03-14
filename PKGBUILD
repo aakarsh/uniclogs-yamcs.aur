@@ -1,6 +1,6 @@
 # Maintainer: Dmitri McGuckin <admin@oresat.org>
 pkgname=uniclogs-yamcs
-pkgver=0.2.0
+pkgver=0.2.1
 pkgrel=1
 pkgdesc="OreSat UniClOGS Ground Station management software."
 arch=('x86_64')
@@ -8,10 +8,9 @@ groups=('oresat')
 url="https://github.com/oresat/uniclogs-yamcs"
 license=('AGPL3')
 depends=('java-runtime' 'bash')
-makedepends=('maven' 'npm')
 replaces=('uniclogs-yamcs')
 source=("https://packages.oresat.org/arch/bundles/${pkgname}-${pkgver//_/-}-bundle.tar.gz")
-sha256sums=('fa22ff74384bf2b343f4ecd588c25f74e8d385fec7d5b8816f99d9c998fbb3e8')
+sha256sums=('5f8afce0c7760d2169569cc100ed6d9b62302a945b1aa00180e021825f9d6c55')
 
 package() {
     _src="${pkgname}-${pkgver//_/-}"
